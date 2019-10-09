@@ -1,0 +1,2 @@
+lead.create:
+  curl -H "Authorization: Bearer 1fb5853d-2f0a-478f-b83d-94b3c8561349_9732a9ea-2191-4180-a657-c5a2c0d19046" -X POST -H "Content-Type: application/json" --data @data.json https://api.evenfinancial.com/leads | jq '.uuid' -r
