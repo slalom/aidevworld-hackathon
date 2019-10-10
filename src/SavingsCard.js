@@ -79,8 +79,6 @@ export default function SavingsCard({ savingsOffer }) {
       effectiveAsOf }
   } = savingsOffer;
 
-  console.log(savingsOffer.partner)
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
