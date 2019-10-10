@@ -15,12 +15,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import BarChartable from './BarChartable'
 const useStyles = makeStyles(theme => ({
   card: {
     marginLeft: 50,
-    backgroundColor: '#3f51b5',
-    maxWidth: 345,
+    maxWidth: 500,
+    width: 500
   },
   header: {
     backgroundColor: '#fff'
@@ -49,7 +49,8 @@ const useStyles = makeStyles(theme => ({
 export default function SavingsCard({savingsOffer}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
+  const [showGraph, setShowGraph] = React.useState(false);
+  const [graphData, setGraphData] = React.useState('');
     const {
         partner: {
             uuid,
@@ -78,6 +79,15 @@ export default function SavingsCard({savingsOffer}) {
     setExpanded(!expanded);
   };
 
+const data = [
+  {
+    name: 'rate', current: 4.0, offer: rate
+  },
+  {
+    name: 'annual % yield', current: 1.0    , offer: annualPercentYield
+  }
+];
+
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -98,7 +108,7 @@ export default function SavingsCard({savingsOffer}) {
       <CardMedia
         className={classes.media}
         image={imageUrl}
-        title="Paella dish"
+        title="HSNBC"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -106,12 +116,6 @@ export default function SavingsCard({savingsOffer}) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
         <IconButton
           className={clsx(classes.expand, {
 
@@ -126,21 +130,9 @@ export default function SavingsCard({savingsOffer}) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-
-          <Typography paragraph>Product Type: {productType}</Typography>
-          <Typography paragraph>Product Url {url}</Typography>
-          <Typography paragraph>Product Url for more details{url}</Typography>
-          <Typography paragraph>Recommendation Score {recommendationScore}</Typography>
-          <Typography paragraph>Rate : {rate}</Typography>
-          <Typography paragraph>Annual Percent Yield : {annualPercentYield}</Typography>
-          <Typography paragraph>Compounding Method : {compoundingMethod}</Typography>
-          <Typography paragraph>Minimum Deposit : {minimumDeposit}</Typography>
-          <Typography paragraph> Minimum Deposit With Fees: {minimumDepositWithFees}</Typography>
-          <Typography paragraph> Monthly Fee: {monthlyFee}</Typography>
-          <Typography paragraph> Check Writing: {checkWriting}</Typography>
-          <Typography paragraph> Effective Data: {effectiveAsOf}</Typography>
-
-
+        <BarChartable
+            data={data}
+        />
         </CardContent>
       </Collapse>
     </Card>
