@@ -102,6 +102,7 @@ export default function SavingsCard({
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
+
             [classes.expandOpen]: expanded,
           })}
           onClick={handleExpandClick}
