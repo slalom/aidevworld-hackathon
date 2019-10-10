@@ -16,27 +16,27 @@ export default class App extends React.Component {
   submitLeadForm = e => {
     e.preventDefault();
 
-    evenClient.createLead().then((response) => {
+    evenClient.createLead().then(response => {
+      console.log(response)
       this.setState({
-        leadUuid: response.data.leadUuid,
-        loanOffers: response.data.loanOffers,
-        savingsOffer: response.data.savingsOffers[0]
+        leadUuid: response.leadUuid,
+        loanOffers: response.loanOffers,
+        savingsOffer: response.savingsOffers[0]
       })
     }).catch((error) => {
       console.log(error)
     });
   }
 
-
+  renderSavingsCard() {
+    return this.state.savingsOffer ? <SavingsCard savingsOffer={this.state.savingsOffer} /> : <div></div>
+  }
 
   render() {
     return (
       <div>
         <LeadForm submit={this.submitLeadForm} />
-        <div> OFFERS SECTION</div>
-        <SavingsCard
-          savingsOffer={this.state.savingsOffer}
-        ></SavingsCard>
+        {this.renderSavingsCard()}
       </div>
     );
   }

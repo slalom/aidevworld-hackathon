@@ -27,12 +27,13 @@ const bodyParameters = {
   }
 }
 
-const createLead = e => {
-  return axios.post(
+const createLead = async () => {
+  let response = await axios.post(
     "https://api.evenfinancial.com/leads/rateTables",
     bodyParameters,
     config
   )
+  return response.data
 }
 
 export default {createLead}
