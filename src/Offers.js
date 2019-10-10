@@ -7,7 +7,7 @@ export default ({offers}) => {
   return (
     <Grid container>
       {offers.map((post, key) => (
-        <Grid item key={key} xs={6} md={6} className="margin-top-20">
+        <Grid item key={key} xs={6} md={6} className="margin-top-20"    >
           <CardActionArea component="a" href="#">
             <SavingsCard savingsOffer={post} />
           </CardActionArea>

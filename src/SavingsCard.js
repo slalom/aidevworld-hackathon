@@ -16,20 +16,36 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import BarChartable from './BarChartable'
+import Orders from './Orders'
+import Title from './Title';
+
+function createData(id, date, name, shipTo, paymentMethod, amount) {
+  return { id, date, name, shipTo, paymentMethod, amount };
+}
+
+const rows = [
+  createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
+  createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
+  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
+  createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
+  createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
+];
+
 const useStyles = makeStyles(theme => ({
   card: {
     marginLeft: 50,
     maxWidth: 500,
-    width: 500
+    width: 500,
+    backgroundColor: 'rgba(63, 81, 181, 0.4x)',
   },
   header: {
     backgroundColor: '#fff'
   },
   media: {
     height: 0,
-    backgroundSize:300,
+    backgroundSize:200,
     backgroundColor: '#fffff !important',
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '30.25%', // 16:9
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -88,6 +104,21 @@ const data = [
   }
 ];
 
+const columnSet1 = ['product type', 'sub type', 'recommendation score', 'rate']
+const rowData1 = [
+  [productType, productSubType, recommendationScore, rate]
+];
+
+const columnSet2 = ['annual % yield', 'compounding method', 'minimum deposit', 'minimum deposit with fees']
+const rowData2 = [
+  [annualPercentYield, compoundingMethod, minimumDeposit, minimumDepositWithFees]
+];
+
+const columnSet3 = ['monthly fee', 'effective date']
+const rowData3 = [
+  [annualPercentYield, effectiveAsOf]
+];
+
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -133,6 +164,20 @@ const data = [
         <BarChartable
             data={data}
         />
+      <Title>Details about your offer</Title>
+        <Orders
+            columns={columnSet1}
+            rows={rowData1}
+        />
+        <Orders
+            columns={columnSet2}
+            rows={rowData2}
+        />
+        <Orders
+            columns={columnSet3}
+            rows={rowData3}
+        />
+
         </CardContent>
       </Collapse>
     </Card>
