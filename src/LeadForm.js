@@ -76,7 +76,7 @@ export default ({ submitToEven }) => {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Sign up
+          Basil
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -130,7 +130,7 @@ export default ({ submitToEven }) => {
             className={classes.submit}
             onClick={submit}
           >
-            Sign Up
+            Check Offers
           </Button>
         </form>
       </div>
