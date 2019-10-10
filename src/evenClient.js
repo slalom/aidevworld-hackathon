@@ -1,4 +1,5 @@
 import axios from "axios";
+import decorateApi from './decorateApi'
 
 const token = "1fb5853d-2f0a-478f-b83d-94b3c8561349_9732a9ea-2191-4180-a657-c5a2c0d19046"
 
@@ -29,7 +30,7 @@ const createLead = async ({state, zip, score}) => {
     body,
     config
   )
-  return response.data
+  return decorateApi(response.data)
 }
 
 export default {createLead}
