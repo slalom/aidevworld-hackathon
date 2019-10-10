@@ -41,27 +41,33 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SavingsCard({
-    partnerName,
-    partnerDescription,
-    partnerDisclaimer,
-    partnerImageUrl,
-    productType,
-    productSubType,
-    url,
-    recommendationScore,
-    disclaimer,
-    rate,
-    annualPercentYield,
-    compoundingMethod,
-    minimumDeposit,
-    minimumDepositWithFees,
-    monthlyFee,
-    checkWriting,
-    effectiveAsOf
-    }   ) {
+export default function SavingsCard({savingsOffer}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
+    const {
+        partner: {
+            uuid,
+            name,
+            description,
+            disclaimer,
+            supportsPersonalizedOffers,
+            imageUrl
+        },
+            productType,
+            productSubType,
+            url,
+            recommendationScore,
+            details: {
+                rate,
+                annualPercentYield,
+                compoundingMethod,
+                minimumDeposit,
+                minimumDepositWithFees,
+                monthlyFee,
+                checkWriting,
+                effectiveAsOf}
+        } = savingsOffer;
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -80,17 +86,17 @@ export default function SavingsCard({
             <MoreVertIcon />
           </IconButton>
         }
-        title= {partnerName}
-        subheader= {partnerDisclaimer}
+        title= {name}
+        subheader= {disclaimer}
       />
       <CardMedia
         className={classes.media}
-        image={partnerImageUrl}
+        image={imageUrl}
         title="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-         {partnerDescription}
+         {description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
