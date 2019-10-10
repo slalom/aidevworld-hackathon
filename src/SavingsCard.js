@@ -19,11 +19,16 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 const useStyles = makeStyles(theme => ({
   card: {
     marginLeft: 50,
+    backgroundColor: '#3f51b5',
     maxWidth: 345,
+  },
+  header: {
+    backgroundColor: '#fff'
   },
   media: {
     height: 0,
     backgroundSize:300,
+    backgroundColor: '#fffff !important',
     paddingTop: '56.25%', // 16:9
   },
   expand: {
@@ -76,6 +81,7 @@ export default function SavingsCard({savingsOffer}) {
   return (
     <Card className={classes.card}>
       <CardHeader
+        className={classes.header}
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
             DS

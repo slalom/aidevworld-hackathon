@@ -2,7 +2,8 @@ import React from "react";
 import SavingsCard from './SavingsCard'
 import LeadForm from './LeadForm';
 import evenClient from './evenClient'
-
+//import AppTheme from './AppTheme';
+        import Dashboard from './Dashboard';
 export default class App extends React.Component {
 
   constructor() {
@@ -36,6 +37,8 @@ export default class App extends React.Component {
       <div>
         <LeadForm submitToEven={this.submitToEven} />
         {this.renderSavingsCard()}
+              <Dashboard />
+        }
       </div>
     );
   }
