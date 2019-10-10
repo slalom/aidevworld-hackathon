@@ -1,7 +1,5 @@
 import React from "react";
-import Grid from '@material-ui/core/Grid';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import SavingsCard from './SavingsCard'
+import Offers from './Offers'
 import LeadForm from './LeadForm';
 import evenClient from './evenClient'
 
@@ -33,15 +31,7 @@ export default class App extends React.Component {
     return (
       <div>
         <LeadForm submitToEven={this.submitToEven} />
-        <Grid container spacing={4}>
-          {this.state.savingsOffers.map((post, key) => (
-            <Grid item key={key} xs={12} md={6}>
-              <CardActionArea component="a" href="#">
-                <SavingsCard savingsOffer={post} />
-              </CardActionArea>
-            </Grid>
-          ))}
-        </Grid>
+        <Offers offers={this.state.savingsOffers} />
       </div >
     );
   }
