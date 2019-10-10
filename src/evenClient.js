@@ -6,8 +6,7 @@ const config = {
   headers: { 'Authorization': "Bearer " + token }
 }
 
-const createLead = async ({state, zip}) => {
-
+const createLead = async ({state, zip, score}) => {
   const body = {
     "productTypes": [
       "savings"
@@ -17,8 +16,8 @@ const createLead = async ({state, zip}) => {
       "zipcode": zip
     },
     "creditInformation": {
-      "providedCreditRating": "excellent",
-      "providedNumericCreditScore": 750
+      "providedCreditRating": score.label,
+      "providedNumericCreditScore": score.value
     },
     "savingsInformation": {
       "minDepositAmount": 1000

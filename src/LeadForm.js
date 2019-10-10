@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -33,14 +33,42 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default ({submitToEven}) => {
+const scores = [
+  {
+    value: 500,
+    label: 'Bad',
+  },
+  {
+    value: 650,
+    label: 'Fair',
+  },
+  {
+    value: 700,
+    label: 'Good',
+  },
+  {
+    value: 800,
+    label: 'Excellent',
+  },
+];
+
+const toScore = value => {
+  return scores.find(entry => entry.value == value)
+}
+
+function valueLabelFormat(value) {
+  return value;
+}
+
+export default ({ submitToEven }) => {
   const classes = useStyles();
-  const [state, setState] = useState({state: ''})
-  const [zip, setZip] = useState({zip: ''})
+  const [state, setState] = useState('')
+  const [zip, setZip] = useState('')
+  const [score, setScore] = useState(0)
 
   const submit = event => {
     event.preventDefault()
-    submitToEven({state, zip})
+    submitToEven({ state, zip, score })
   }
 
   return (
@@ -79,26 +107,18 @@ export default ({submitToEven}) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+              <Typography id="h4">
+                Credit Score
+              </Typography>
+              <Slider
+                defaultValue={20}
+                valueLabelFormat={valueLabelFormat}
+                step={null}
+                valueLabelDisplay="auto"
+                max={800}
+                min={500}
+                marks={scores}
+                onChange={(event, value) => setScore(toScore(value))}
               />
             </Grid>
           </Grid>
@@ -112,13 +132,6 @@ export default ({submitToEven}) => {
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
         </form>
       </div>
     </Container>
