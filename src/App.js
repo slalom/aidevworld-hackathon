@@ -2,7 +2,19 @@ import React from "react";
 import Offers from './Offers'
 import LeadForm from './LeadForm';
 import evenClient from './evenClient'
+import comprehendClient from './comprehendClient'
 
+
+const enrichWithDetect = data => {
+  return Promise.all(
+    data.savingsOffers.map(offer => {
+      return comprehendClient.detectKey({ text: offer.partner.description })
+        .then(response => {
+          offer.partner.keyPoints = response.body.KeyPhrases.map(item => item.Text)
+          return offer  
+        })
+    }))
+}
 export default class App extends React.Component {
 
   constructor() {
@@ -16,11 +28,11 @@ export default class App extends React.Component {
 
   submitToEven = lead => {
     evenClient.createLead(lead)
+      .then(enrichWithDetect)
       .then(response => {
+        debugger
         this.setState({
-          leadUuid: response.leadUuid,
-          loanOffers: response.loanOffers,
-          savingsOffers: response.savingsOffers
+          savingsOffers: response
         })
       }).catch((error) => {
         console.log(error)

@@ -19,6 +19,5 @@ const capitalOne = template => {
 export default data => {
   let savingsOffer = data.savingsOffers[0]
   data.savingsOffers = [savingsOffer, bofa(savingsOffer), chase(savingsOffer), capitalOne(savingsOffer)]
-  console.log(data)
   return data
 }

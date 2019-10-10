@@ -19,6 +19,13 @@ import BarChartable from './BarChartable'
 import Orders from './Orders'
 import Title from './Title';
 
+
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import StarIcon from '@material-ui/icons/Star';
+
 function createData(id, date, name, shipTo, paymentMethod, amount) {
   return { id, date, name, shipTo, paymentMethod, amount };
 }
@@ -43,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     height: 0,
-    backgroundSize:200,
+    backgroundSize: 200,
     backgroundColor: '#fffff !important',
     paddingTop: '30.25%', // 16:9
   },
@@ -62,62 +69,65 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SavingsCard({savingsOffer}) {
+export default function SavingsCard({ savingsOffer }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [showGraph, setShowGraph] = React.useState(false);
   const [graphData, setGraphData] = React.useState('');
-    const {
-        partner: {
-            uuid,
-            name,
-            description,
-            disclaimer,
-            supportsPersonalizedOffers,
-            imageUrl
-        },
-            productType,
-            productSubType,
-            url,
-            recommendationScore,
-            details: {
-                rate,
-                annualPercentYield,
-                compoundingMethod,
-                minimumDeposit,
-                minimumDepositWithFees,
-                monthlyFee,
-                checkWriting,
-                effectiveAsOf}
-        } = savingsOffer;
+  const {
+    partner: {
+      uuid,
+      name,
+      description,
+      disclaimer,
+      supportsPersonalizedOffers,
+      imageUrl,
+      keyPoints
+    },
+    productType,
+    productSubType,
+    url,
+    recommendationScore,
+    details: {
+      rate,
+      annualPercentYield,
+      compoundingMethod,
+      minimumDeposit,
+      minimumDepositWithFees,
+      monthlyFee,
+      checkWriting,
+      effectiveAsOf }
+  } = savingsOffer;
+
+  console.log(savingsOffer.partner)
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-const data = [
-  {
-    name: 'rate', current: 4.0, offer: rate
-  },
-  {
-    name: 'annual % yield', current: 1.0    , offer: annualPercentYield
-  }
-];
+  const data = [
+    {
+      name: 'rate', current: 4.0, offer: rate
+    },
+    {
+      name: 'annual % yield', current: 1.0, offer: annualPercentYield
+    }
+  ];
 
-const columnSet1 = ['product type', 'sub type', 'recommendation score', 'rate']
-const rowData1 = [
-  [productType, productSubType, recommendationScore, rate]
-];
+  const columnSet1 = ['product type', 'sub type', 'recommendation score', 'rate']
+  const rowData1 = [
+    [productType, productSubType, recommendationScore, rate]
+  ];
 
-const columnSet2 = ['annual % yield', 'compounding method', 'minimum deposit', 'minimum deposit with fees']
-const rowData2 = [
-  [annualPercentYield, compoundingMethod, minimumDeposit, minimumDepositWithFees]
-];
+  const columnSet2 = ['annual % yield', 'compounding method', 'minimum deposit', 'minimum deposit with fees']
+  const rowData2 = [
+    [annualPercentYield, compoundingMethod, minimumDeposit, minimumDepositWithFees]
+  ];
 
-const columnSet3 = ['monthly fee', 'effective date']
-const rowData3 = [
-  [annualPercentYield, effectiveAsOf]
-];
+  const columnSet3 = ['monthly fee', 'effective date']
+  const rowData3 = [
+    [annualPercentYield, effectiveAsOf]
+  ];
 
   return (
     <Card className={classes.card}>
@@ -133,8 +143,8 @@ const rowData3 = [
             <MoreVertIcon />
           </IconButton>
         }
-        title= {name}
-        subheader= {disclaimer}
+        title={name}
+        subheader={disclaimer}
       />
       <CardMedia
         className={classes.media}
@@ -143,7 +153,7 @@ const rowData3 = [
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-         {description}
+          {description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -161,22 +171,35 @@ const rowData3 = [
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-        <BarChartable
+          <Typography component="h4" variant="h5">
+            Key Points:
+          </Typography>
+          <List>
+            {keyPoints.map(point => {
+              return (<ListItem>
+                <ListItemIcon>
+                  <StarIcon />
+                </ListItemIcon>
+                <ListItemText primary={point} />
+              </ListItem>)
+            })}
+          </List>
+          <BarChartable
             data={data}
-        />
-      <Title>Details about your offer</Title>
-        <Orders
+          />
+          <Title>Details about your offer</Title>
+          <Orders
             columns={columnSet1}
             rows={rowData1}
-        />
-        <Orders
+          />
+          <Orders
             columns={columnSet2}
             rows={rowData2}
-        />
-        <Orders
+          />
+          <Orders
             columns={columnSet3}
             rows={rowData3}
-        />
+          />
 
         </CardContent>
       </Collapse>
