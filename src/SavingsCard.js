@@ -126,7 +126,7 @@ export default function SavingsCard({ savingsOffer }) {
 
   const columnSet3 = ['monthly fee', 'effective date']
   const rowData3 = [
-    [annualPercentYield, effectiveAsOf]
+    [monthlyFee, effectiveAsOf]
   ];
 
   return (
