@@ -4,15 +4,16 @@ import LeadForm from './LeadForm';
 import evenClient from './evenClient'
 
 export default class App extends React.Component {
-    constructor() {
-        super();
-        this.submitLeadForm.bind(this);
-    }
-  state = {
-    users: []
-  };
 
-  submitLeadForm = e =>{
+  constructor() {
+    super();
+    this.submitLeadForm.bind(this);
+    this.state = {
+      users: []
+    }
+  }
+
+  submitLeadForm = e => {
     e.preventDefault();
 
     evenClient.createLead().then((response) => {
@@ -31,11 +32,11 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <LeadForm submit={this.submitLeadForm}/>
+        <LeadForm submit={this.submitLeadForm} />
         <div> OFFERS SECTION</div>
-            <SavingsCard
-                 savingsOffer={this.state.savingsOffer}
-            ></SavingsCard>
+        <SavingsCard
+          savingsOffer={this.state.savingsOffer}
+        ></SavingsCard>
       </div>
     );
   }
