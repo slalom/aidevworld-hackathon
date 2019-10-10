@@ -76,6 +76,7 @@ export default ({ submitToEven }) => {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
+          <img src="https://cdn.shopify.com/s/files/1/0156/0137/products/Holy-Basil-1280x960.jpg?v=1564656220" width="40px"/>  
           Basil
         </Typography>
         <form className={classes.form} noValidate>
