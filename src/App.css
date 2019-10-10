@@ -28,3 +28,10 @@
 .MuiTableCell-head{
 font-weight: 700 !important;
 }
+
+.makeStyles-header-274 {
+background-color: rgba(63, 81, 181, 0.2)
+}
+.bold {
+font-size: 16px;
+}

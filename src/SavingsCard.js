@@ -10,9 +10,6 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import BarChartable from './BarChartable'
@@ -26,17 +23,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import StarIcon from '@material-ui/icons/Star';
 
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-  createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-  createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-  createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-];
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -65,28 +51,23 @@ const useStyles = makeStyles(theme => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: 'rgba(63, 81, 181)',
   },
 }));
 
 export default function SavingsCard({ savingsOffer }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const [showGraph, setShowGraph] = React.useState(false);
-  const [graphData, setGraphData] = React.useState('');
   const {
     partner: {
-      uuid,
       name,
       description,
       disclaimer,
-      supportsPersonalizedOffers,
       imageUrl,
       keyPoints
     },
     productType,
     productSubType,
-    url,
     recommendationScore,
     details: {
       rate,
@@ -95,7 +76,6 @@ export default function SavingsCard({ savingsOffer }) {
       minimumDeposit,
       minimumDepositWithFees,
       monthlyFee,
-      checkWriting,
       effectiveAsOf }
   } = savingsOffer;
 
@@ -128,6 +108,8 @@ export default function SavingsCard({ savingsOffer }) {
   const rowData3 = [
     [monthlyFee, effectiveAsOf]
   ];
+
+
 
   return (
     <Card className={classes.card}>
@@ -178,7 +160,7 @@ export default function SavingsCard({ savingsOffer }) {
             {keyPoints.map(point => {
               return (<ListItem>
                 <ListItemIcon>
-                  <StarIcon />
+                  <StarIcon     />
                 </ListItemIcon>
                 <ListItemText primary={point} />
               </ListItem>)

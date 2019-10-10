@@ -28,6 +28,10 @@ const useStyles = makeStyles(theme => ({
     maxHeight: 440,
     overflow: 'auto',
   },
+  bold: {
+    fontSize: 16,
+    fontWeight: 700
+  }
 }))
 
 export default function Orders({columns, rows}) {
@@ -43,7 +47,7 @@ export default function Orders({columns, rows}) {
         <TableHead>
           <TableRow>
             {columns.map(column => (
-                <TableCell className="bold">{column}</TableCell>
+                <TableCell className={classes.bold}>{column}</TableCell>
             ))}
           </TableRow>
         </TableHead>
