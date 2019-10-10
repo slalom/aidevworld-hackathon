@@ -30,7 +30,6 @@ export default class App extends React.Component {
     evenClient.createLead(lead)
       .then(enrichWithDetect)
       .then(response => {
-        debugger
         this.setState({
           savingsOffers: response
         })
