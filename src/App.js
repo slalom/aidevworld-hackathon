@@ -7,25 +7,24 @@ export default class App extends React.Component {
 
   constructor() {
     super();
-    this.submitLeadForm.bind(this);
+    this.submitToEven.bind(this);
     this.state = {
       users: []
     }
   }
 
-  submitLeadForm = e => {
-    e.preventDefault();
-
-    evenClient.createLead().then(response => {
-      console.log(response)
-      this.setState({
-        leadUuid: response.leadUuid,
-        loanOffers: response.loanOffers,
-        savingsOffer: response.savingsOffers[0]
-      })
-    }).catch((error) => {
-      console.log(error)
-    });
+  submitToEven = lead => {
+    evenClient.createLead(lead)
+      .then(response => {
+        console.log(response)
+        this.setState({
+          leadUuid: response.leadUuid,
+          loanOffers: response.loanOffers,
+          savingsOffer: response.savingsOffers[0]
+        })
+      }).catch((error) => {
+        console.log(error)
+      });
   }
 
   renderSavingsCard() {
@@ -35,7 +34,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <LeadForm submit={this.submitLeadForm} />
+        <LeadForm submitToEven={this.submitToEven} />
         {this.renderSavingsCard()}
       </div>
     );

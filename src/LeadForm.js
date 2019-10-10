@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -33,8 +33,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function LeadForm(props) {
+export default ({submitToEven}) => {
   const classes = useStyles();
+  const [state, setState] = useState({state: ''})
+  const [zip, setZip] = useState({zip: ''})
+
+  const submit = event => {
+    event.preventDefault()
+    submitToEven({state, zip})
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -47,25 +54,28 @@ export default function LeadForm(props) {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                id="state"
+                name="state"
+                label="State"
+                placeholder="CA"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
                 autoFocus
+                onChange={event => setState(event.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                id="zip"
+                name="zip"
+                label="Zip Code"
+                placeholder="94101"
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
                 autoComplete="lname"
+                onChange={event => setZip(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -98,7 +108,7 @@ export default function LeadForm(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={props.submit}
+            onClick={submit}
           >
             Sign Up
           </Button>

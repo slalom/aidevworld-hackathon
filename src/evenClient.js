@@ -6,31 +6,28 @@ const config = {
   headers: { 'Authorization': "Bearer " + token }
 }
 
-const bodyParameters = {
-  "productTypes": [
-    "savings"
-  ],
-  "personalInformation": {
-    "state": "NY",
-    "zipcode": "10010"
-  },
-  "creditInformation": {
-    "providedCreditRating": "excellent",
-    "providedNumericCreditScore": 750
-  },
-  "savingsInformation": {
-    "minDepositAmount": 1000
-  },
-  "clientTags": {
-    "hello": [],
-    "something": []
-  }
-}
+const createLead = async ({state, zip}) => {
 
-const createLead = async () => {
+  const body = {
+    "productTypes": [
+      "savings"
+    ],
+    "personalInformation": {
+      "state": state,
+      "zipcode": zip
+    },
+    "creditInformation": {
+      "providedCreditRating": "excellent",
+      "providedNumericCreditScore": 750
+    },
+    "savingsInformation": {
+      "minDepositAmount": 1000
+    }
+  }
+
   let response = await axios.post(
     "https://api.evenfinancial.com/leads/rateTables",
-    bodyParameters,
+    body,
     config
   )
   return response.data
